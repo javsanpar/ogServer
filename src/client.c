@@ -44,8 +44,6 @@ static int og_resp_probe(struct og_client *cli, json_t *data)
 			if (err < 0)
 				return err;
 			cli->speed = speed;
-		} else {
-			return -1;
 		}
 	}
 
@@ -76,8 +74,6 @@ static int og_resp_shell_run(struct og_client *cli, json_t *data)
 			err = og_json_parse_string(value, &output);
 			if (err < 0)
 				return err;
-		} else {
-			return -1;
 		}
 	}
 
@@ -126,8 +122,6 @@ static int og_resp_hardware(json_t *data, struct og_client *cli)
 			err = og_json_parse_string(value, &hardware);
 			if (err < 0)
 				return -1;
-		} else {
-			return -1;
 		}
 	}
 
@@ -192,8 +186,6 @@ static int og_resp_software(json_t *data, struct og_client *cli)
 			err = og_json_parse_string(value, &software);
 		else if (!strcmp(key, "partition"))
 			err = og_json_parse_string(value, &partition);
-		else
-			return -1;
 
 		if (err < 0)
 			return -1;
@@ -311,8 +303,6 @@ static int og_resp_refresh(json_t *data, struct og_client *cli)
 			err = og_json_parse_partition_array(value, partitions);
 		} else if (!strcmp(key, "serial_number")) {
 			err = og_json_parse_string(value, &serial_number);
-		} else {
-			return -1;
 		}
 
 		if (err < 0)
@@ -456,8 +446,6 @@ static int og_resp_image_create(json_t *data, struct og_client *cli)
 			err = og_json_parse_string(value, &filesystem);
 		else if (!strcmp(key, "datasize"))
 			err = og_json_parse_uint64(value, &datasize);
-		else
-			return -1;
 
 		if (err < 0)
 			return err;
@@ -557,8 +545,6 @@ static int og_resp_image_restore(json_t *data, struct og_client *cli)
 			err = og_json_parse_string(value, &disk);
 		else if (!strcmp(key, "image_id"))
 			err = og_json_parse_string(value, &image_id);
-		else
-			return -1;
 
 		if (err < 0)
 			return err;
